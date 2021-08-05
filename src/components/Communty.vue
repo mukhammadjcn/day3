@@ -4,8 +4,9 @@
             <h2 class="title">See what magic our community is creating</h2>
             <p class="info">Explore these examples of Series, created by our Superpeers, and reserve your spot today</p>
             <div class="row users">
-                <div class="user" v-for="(item, index) in persons" :key="index">
-                    <div class="user__images">
+                <div  class="user" v-for="(item, index) in people" :key="index">
+                    <div>
+                          <div class="user__images">
                         <img  class="userBg" :src="item.userBg" alt="">
                         <img class="userAvatar" :src="item.userAvatar" alt="">
                         <span class="user__status" v-if="item.status">{{item.status}}</span>
@@ -16,8 +17,9 @@
                         <p class="minInfo">{{item.userArticle}}</p>
                         <div class="row">
                             <span class="user__startDate minInfo">Starts : <span>{{item.userDate}}</span></span>
-                            <button class="btn tr" @click="toggle()">{{isBtn ? item.label : "FOLLOWED"}}</button>
+                            <button class="btn tr" @click="toggle(item)">{{item.followed ? item.label : "FOLLOWED"}}</button>
                         </div>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -34,14 +36,14 @@ export default {
         }
     },
     props : {
-        persons : {
+        people : {
             type : Array,
             default : () => {[]}
         }
     },
     methods :{
-        toggle(){
-            this.isBtn =! this.isBtn
+        toggle(item){
+            item.followed = !item.followed
         }
     }
 }
